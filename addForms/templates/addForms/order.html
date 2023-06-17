@@ -1,0 +1,70 @@
+<!--{% extends 'forms/base.html' %}-->
+
+<!--{% block content %}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/Users/pavelbandurovskij/PycharmProjects/django_forms/addForms/templates/forms/forms.css">
+    <title>Бандуровский. Задание 6</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .btn{
+            background-color: #4CAF50;
+            padding: 8px;
+            color: white;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Добавление новых заказов.</h1>
+
+        <a href="http://localhost:8000/forms/good/">Добавить товар или услугу</a>
+        <br>
+        <a href="http://localhost:8000/forms/client/">Добавить клиента</a>
+
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Save</button>
+    </form>
+    <table>
+    <tr>
+            <th>Название</th>
+            <th>Количество</th>
+            <th>Имя клиента</th>
+            <th>Удаление записи</th>
+    </tr>
+
+    {% for d in data %}
+
+    <tr>
+        <th>{{ d.goods_name }}</th>
+        <th>{{ d.amount }}</th>
+        <th>{{ d.name }}</th>
+<!--        <th><input type='submit' value='Удалить'></th>-->
+        <th><a href="{% url 'delete_order' d.pk  %}">Удалить</a> </th>
+    </tr>
+<!--        .split(",")[0]-->
+
+    {% endfor %}
+</table>
+<!--{% endblock %}-->
+</body>
+</html>
